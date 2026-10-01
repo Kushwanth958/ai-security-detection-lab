@@ -6,6 +6,10 @@ The lab runs offline with Python's standard library. An explicit live mode conne
 
 > **Research status:** the included results are scripted fixtures used to validate the software. No public LLMs have been evaluated in this repository's initial evidence bundle. Five real model configurations are supported; their results must be generated separately.
 
+![Atlas evaluation dashboard showing explicitly labeled fixture results](docs/assets/dashboard.png)
+
+The [SOC investigation preview](docs/assets/soc-investigations.png) shows correlated timelines, asset context, and evidence review. Both images were captured from the running application in Chromium CI.
+
 ## Run the lab
 
 Requires Python 3.11 or later. No API key, GPU, Docker, or runtime dependency installation is needed for the offline demo.

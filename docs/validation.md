@@ -46,6 +46,6 @@ NODE_PATH=.ui-tools/node_modules node tests/ui_smoke.cjs
 
 To capture screenshots after a successful check, also set `LAB_SCREENSHOT_DIR=docs/assets`. The GitHub browser job preserves screenshots as an artifact for visual inspection.
 
-The GitHub workflow defines separate Python-matrix and Chromium UI jobs. All four jobs passed in [run 36881832958](https://github.com/Kushwanth958/ai-security-detection-lab/actions/runs/36881832958), at commit `75beeaecdd91a1a7077bc40e2fd5c53ae29fc53d`.
+The GitHub workflow defines separate Python-matrix and Chromium UI jobs. All four jobs passed in [run 36882545584](https://github.com/Kushwanth958/ai-security-detection-lab/actions/runs/36882545584), at commit `84af7d0e654850d48b1555912f5d51c6e487d1f4`. The included dashboard and SOC screenshots were captured in that run and visually inspected before publication.
 
 The initial browser assertion incorrectly expected a substring search for `direct_injection` to exclude `indirect_injection`. The corrected test uses `encoded_leakage` and passed. The application search behavior was unchanged. Local browser verification could not run because the implementation environment lacked Chromium and the download returned invalid archives; remote Chromium CI supplied the browser evidence.
