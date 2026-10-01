@@ -17,7 +17,7 @@ const { chromium } = require("playwright");
     assert.equal(await page.locator("#metrics .metric").count(), 4);
     await page.locator("#mode-filter").selectOption("secured");
     assert.match(await page.locator("#trial-count").innerText(), /150 matching/);
-    await page.locator("#search").fill("direct_injection");
+    await page.locator("#search").fill("encoded_leakage");
     assert.match(await page.locator("#trial-count").innerText(), /15 matching/);
     await page.locator(".evidence-button").first().click();
     assert.equal(await page.locator("#evidence-dialog").isVisible(), true);

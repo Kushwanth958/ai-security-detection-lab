@@ -53,4 +53,9 @@ jobs:
           LAB_SERVER_PID=$!
           trap 'kill "$LAB_SERVER_PID"' EXIT
           python -c "import time, urllib.request; time.sleep(1); urllib.request.urlopen('http://127.0.0.1:8765').close()"
-          NODE_PATH=.ui-tools/node_modules node tests/ui_smoke.cjs
+          LAB_SCREENSHOT_DIR=runs/ui-screenshots NODE_PATH=.ui-tools/node_modules node tests/ui_smoke.cjs
+      - name: Preserve dashboard screenshots
+        uses: actions/upload-artifact@v4
+        with:
+          name: dashboard-screenshots
+          path: runs/ui-screenshots/
