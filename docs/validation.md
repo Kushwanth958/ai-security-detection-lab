@@ -10,7 +10,8 @@ Validation performed during initial implementation on Python 3.12.14:
 | Structured SOC pipeline | Four schema-valid fixture investigations with required evidence |
 | JavaScript syntax | `node --check aisec_lab/static/app.js` passed |
 | Package build/install | Wheel built and installed; bundled data and default commands verified outside the source directory |
-| Browser UI smoke test | Not executed successfully: no Chromium binary; download returned invalid archives |
+| Browser UI smoke test | Passed in GitHub CI with Chromium; filters, pagination, evidence, SOC, mobile overflow, and hostile-text rendering checked |
+| Remote Python matrix | Passed on Python 3.11, 3.12, and 3.13, including package installation outside the source tree |
 
 The model-adapter integration tests use a local HTTP stub, not a public LLM. They verify the request contract, structured tool calls, safe error handling, redirects, and malformed-response handling. No real model evaluation or billing occurred during these checks.
 
@@ -43,6 +44,8 @@ In another terminal on macOS/Linux:
 NODE_PATH=.ui-tools/node_modules node tests/ui_smoke.cjs
 ```
 
-To capture screenshots after a successful check, also set `LAB_SCREENSHOT_DIR=docs/assets`. Screenshots are not supplied in the initial bundle because the browser check could not run in the implementation environment.
+To capture screenshots after a successful check, also set `LAB_SCREENSHOT_DIR=docs/assets`. The GitHub browser job preserves screenshots as an artifact for visual inspection.
 
-The GitHub workflow defines separate Python-matrix and Chromium UI jobs. Remote CI has not run until the repository is published and the workflow executes. A declared workflow is not evidence of a passing remote check.
+The GitHub workflow defines separate Python-matrix and Chromium UI jobs. All four jobs passed in [run 36881832958](https://github.com/Kushwanth958/ai-security-detection-lab/actions/runs/36881832958), at commit `75beeaecdd91a1a7077bc40e2fd5c53ae29fc53d`.
+
+The initial browser assertion incorrectly expected a substring search for `direct_injection` to exclude `indirect_injection`. The corrected test uses `encoded_leakage` and passed. The application search behavior was unchanged. Local browser verification could not run because the implementation environment lacked Chromium and the download returned invalid archives; remote Chromium CI supplied the browser evidence.

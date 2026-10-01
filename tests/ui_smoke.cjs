@@ -32,7 +32,8 @@ const { chromium } = require("playwright");
     const outputDir = process.env.LAB_SCREENSHOT_DIR;
     if (outputDir) {
       fs.mkdirSync(outputDir, {recursive: true});
-      await page.screenshot({path: path.join(outputDir, "dashboard.png"), fullPage: true});
+      await page.evaluate(() => window.scrollTo(0, 0));
+      await page.screenshot({path: path.join(outputDir, "dashboard.png")});
     }
     await page.locator("#soc-tab").click();
     await page.locator(".soc-card").first().waitFor();
