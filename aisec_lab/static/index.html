@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A reproducible application security and SOC research lab.">
+  <title>Atlas · AI Security Research Lab</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="/" aria-label="Atlas lab home"><span class="brand-mark">A</span> ATLAS<span class="brand-sub">RESEARCH LAB</span></a>
+    <div class="side-label">WORKSPACE</div>
+    <nav aria-label="Lab views">
+      <button id="evaluation-tab" class="nav-item active" aria-pressed="true">01 <span>Model evaluations</span></button>
+      <button id="soc-tab" class="nav-item" aria-pressed="false">02 <span>SOC investigations</span></button>
+    </nav>
+    <div class="side-note"><span class="status-dot"></span> LOCAL RESEARCH ENVIRONMENT<p>Read-only evidence explorer.<br>All tool effects are simulated.</p></div>
+  </aside>
+  <main>
+    <header class="topbar"><span>SECURITY / AI SYSTEMS</span><span class="version">LAB v0.1.0</span></header>
+    <section class="page-heading"><div><p class="eyebrow">OBSERVE. EVALUATE. CONTAIN.</p><h1 id="page-title">Model evaluations</h1><p class="subtitle" id="page-description">Trace the boundary between a model's behavior and an application's controls.</p></div><span class="environment-label">SYNTHETIC DATA</span></section>
+    <div id="message" role="status" class="notice">Loading research evidence…</div>
+    <section id="evaluation-view">
+      <div class="toolbar"><label for="run-select">Evaluation run</label><select id="run-select"></select><span id="run-meta" class="muted"></span></div>
+      <div class="metrics" id="metrics"></div>
+      <div class="two-column">
+        <section class="panel"><div class="panel-heading"><div><p class="eyebrow">APPLICATION OUTCOME</p><h2>Attack success by configuration</h2></div><span class="legend"><i class="baseline-dot"></i> Baseline <i class="secured-dot"></i> Secured</span></div><div id="comparison" class="comparison"></div><p class="footnote">Scored adversarial trials only. Rates describe this dataset and application configuration.</p></section>
+        <section class="panel"><div class="panel-heading"><div><p class="eyebrow">CONTROL TELEMETRY</p><h2>Detection signals</h2></div></div><div id="detections" class="detection-list"></div><p class="footnote">One trial can trigger several rules. Input signals are heuristics and may flag legitimate discussion.</p></section>
+      </div>
+      <section class="panel evidence-panel"><div class="panel-heading"><div><p class="eyebrow">AUDIT TRAIL</p><h2>Trial evidence</h2></div><span id="trial-count" class="muted"></span></div>
+        <div class="filters"><label>Search<input id="search" type="search" placeholder="Case, model, category…"></label><label>Configuration<select id="mode-filter"><option value="">All configurations</option><option>baseline</option><option>secured</option></select></label><label>Outcome<select id="outcome-filter"><option value="">All outcomes</option><option value="success">Objective achieved</option><option value="failure">Objective not achieved</option><option value="review_required">Needs review</option><option value="error">Error</option></select></label></div>
+        <div class="table-scroll"><table><thead><tr><th>Case / model</th><th>Configuration</th><th>Application outcome</th><th>Signals</th><th>Evidence</th></tr></thead><tbody id="trials"></tbody></table></div>
+        <div class="pagination"><button id="previous">Previous</button><span id="page-info"></span><button id="next">Next</button></div>
+      </section>
+      <details class="panel provenance"><summary>Reproducibility &amp; measurement notes</summary><pre id="provenance"></pre><p class="footnote">Errors and ambiguous unreviewed trials are excluded from scored denominators. Keyword task checks are usability proxies. Fixture rates validate software only.</p></details>
+    </section>
+    <section id="soc-view" hidden><div class="metrics" id="soc-metrics"></div><div id="soc-alerts" class="soc-alerts"></div></section>
+    <footer>ATLAS / AI SECURITY &amp; DETECTION RESEARCH LAB <span>Evidence first. Human review required.</span></footer>
+  </main>
+  <dialog id="evidence-dialog"><div class="dialog-heading"><h2 id="evidence-title">Trial evidence</h2><button id="close-dialog" aria-label="Close evidence">Close ×</button></div><p class="footnote">Persisted output is redacted, including baseline responses. The grading verdict was calculated before audit redaction.</p><pre id="evidence-content"></pre></dialog>
+</body>
+</html>
