@@ -1,0 +1,9 @@
+{
+  "models": [
+    {"id": "model-1", "model": "REPLACE_WITH_EXACT_MODEL_ID", "base_url": "http://127.0.0.1:11434/v1", "api_key_env": "LAB_MODEL_1_KEY", "max_tokens": 512, "temperature": 0.0, "timeout_seconds": 45},
+    {"id": "model-2", "model": "REPLACE_WITH_EXACT_MODEL_ID", "base_url": "http://127.0.0.1:11434/v1", "api_key_env": "LAB_MODEL_2_KEY", "max_tokens": 512, "temperature": 0.0, "timeout_seconds": 45},
+    {"id": "model-3", "model": "REPLACE_WITH_EXACT_MODEL_ID", "base_url": "http://127.0.0.1:11434/v1", "api_key_env": "LAB_MODEL_3_KEY", "max_tokens": 512, "temperature": 0.0, "timeout_seconds": 45},
+    {"id": "model-4", "model": "REPLACE_WITH_EXACT_MODEL_ID", "base_url": "http://127.0.0.1:11434/v1", "api_key_env": "LAB_MODEL_4_KEY", "max_tokens": 512, "temperature": 0.0, "timeout_seconds": 45},
+    {"id": "model-5", "model": "REPLACE_WITH_EXACT_MODEL_ID", "base_url": "http://127.0.0.1:11434/v1", "api_key_env": "LAB_MODEL_5_KEY", "max_tokens": 512, "temperature": 0.0, "timeout_seconds": 45}
+  ]
+}
