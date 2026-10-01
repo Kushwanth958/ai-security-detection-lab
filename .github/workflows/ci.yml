@@ -1,0 +1,56 @@
+name: Lab verification
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  python:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ["3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: python -W error::ResourceWarning -m unittest discover -s tests -v
+      - name: Validate offline research pipeline
+        run: |
+          python -m aisec_lab validate
+          python -m aisec_lab demo
+          python -m aisec_lab report
+          python -m aisec_lab soc
+      - name: Validate package installation
+        run: |
+          python -m pip install .
+          cd "$RUNNER_TEMP"
+          aisec-lab validate
+
+  browser:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install browser test dependency
+        run: |
+          npm install --prefix .ui-tools --no-save playwright@1.62.1
+          .ui-tools/node_modules/.bin/playwright install --with-deps chromium --only-shell
+      - name: Run UI verification
+        run: |
+          python -m aisec_lab demo
+          python -m aisec_lab soc
+          python -m aisec_lab serve > runs/server.log 2>&1 &
+          LAB_SERVER_PID=$!
+          trap 'kill "$LAB_SERVER_PID"' EXIT
+          python -c "import time, urllib.request; time.sleep(1); urllib.request.urlopen('http://127.0.0.1:8765').close()"
+          NODE_PATH=.ui-tools/node_modules node tests/ui_smoke.cjs
